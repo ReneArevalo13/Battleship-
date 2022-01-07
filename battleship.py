@@ -8,13 +8,22 @@ def user_input():
     x_string, y_string = inp.split(",") # split the input string at the "," and store
     x = int(x_string)
     y = int(y_string)
-    return x,y
+    return (x,y) #output as a tuple
 
 
-def render_board(height, width):
+def render_board(height, width, shots):
     # function to render the game board with for a given height and width
     border = ("+" + "-" * width + "+")
+    shots_set = set(shots)
     print(border)
-    for i in range(height):
-        print("|" + " "*width + "|") 
+    for j in range(height): #iterate along the vertical, y-axis
+        row = []
+        for i in range(width): #iterate along the horizontal, x-axis
+            if (i, j) in shots_set:
+                hit = "X" #symbol for ship being hit
+            else:
+                hit = " " #empty space for a non hit
+            row.append(hit)
+
+        print("|" + "".join(row) + "|") 
     print(border)
